@@ -43,7 +43,13 @@ void setup() {
 void loop()
 {
 
+  check_mqtt();
+
   if (gv_senstick == true) {
+    if ( !gv_mqtt_conn_ok ) {
+      ESP.restart();
+    }
+
     do_sensor();
 
     send_pub_vals();
@@ -53,7 +59,6 @@ void loop()
 
   check_ota();
 
-  check_mqtt();
 
   delay(500);
 
